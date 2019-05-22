@@ -83,5 +83,23 @@ router.post('/putData', (req, res) => {
 // append /api for our http requests
 app.use('/api', router);
 
+function doubleAfter2Seconds(x) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(x * 2);
+    }, 2000);
+  });
+}
+
+async function addAsync(x) {
+  const a = await doubleAfter2Seconds(10);
+  
+  console.log(a);
+  
+  return a;
+}
+
+addAsync();
+
 // launch our backend into a port
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
